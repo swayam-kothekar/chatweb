@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Bot, PlayCircle, User } from "lucide-react"
+import { Bot, User } from "lucide-react"
 
 interface MessageProps {
     content: string
