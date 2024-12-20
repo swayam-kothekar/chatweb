@@ -5,7 +5,7 @@ import { cookies } from "next/headers"
 
 interface PageProps {
     params:{
-        url: string | string[] | undefined
+        url: string[] | undefined
     }
 }
 
@@ -16,6 +16,11 @@ function reconstructUrl({url}: {url:string[]}) {
 }
 
 const Page = async ({params}: PageProps) =>{
+
+    if (!params.url) {
+        return <div>Error: No URL provided</div>
+    }
+    
     const reconstructedUrl = reconstructUrl({url: params.url as string[]})
     const sessionCookie = (await cookies()).get("sessionId")?.value
     const sessionId = (reconstructedUrl + "-" + sessionCookie).replace(/\//g, "")
