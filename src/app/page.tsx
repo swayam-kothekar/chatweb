@@ -1,101 +1,137 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import React, { useState } from 'react';
+import { ArrowRight, Globe, Link, MessageSquare, MessagesSquare, PlusCircle, Zap } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+const LandingPage = () => {
+  const router = useRouter()
+  const demoUrl = "https://chatweb.swayam.tech/"
+  const [website, setWebsite] = useState("")
+
+  const handleWebsiteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWebsite(e.target.value)
+  };
+
+  const handleSubmit = () => {
+    if (!website) return
+    const finalUrl = `${demoUrl}${website}`
+    router.push(finalUrl)
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">
+            ChatWeb - Chat with Any Website's Content
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Turn any website into an interactive chat experience by simply adding our URL prefix
+          </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 w-full">
+            <div className="flex flex-col sm:flex-row items-center gap-2 p-3 sm:p-4 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
+              <span className="hidden sm:inline text-gray-400 text-base whitespace-nowrap">
+                {demoUrl}
+              </span>
+
+              <input
+                type="text"
+                value={website}
+                onChange={handleWebsiteChange}
+                onKeyDown={(e) => {
+                  if(e.key === "Enter" && !e.shiftKey){
+                      e.preventDefault()
+                      handleSubmit()
+                  }
+              }}
+                placeholder="Enter any website URL..."
+                className="w-full bg-gray-800 border-0 focus:outline-none focus:ring-0 text-gray-100 placeholder-gray-500 text-base py-2"
+              />
+
+              <button
+                onClick={handleSubmit}
+                className="w-full sm:w-auto bg-blue-600 text-white px-6 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors text-base font-medium whitespace-nowrap"
+              >
+                Try Now <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+
+        <div className="grid md:grid-cols-3 gap-8 mt-20">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-xl border border-gray-700">
+            <div className="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
+              <Zap className="text-blue-400" size={24} />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-white">Instant Access</h3>
+            <p className="text-gray-300">
+              No setup required. Just add our URL prefix to any website and start chatting immediately.
+            </p>
+          </div>
+
+          <div className="bg-gray-800 p-6 rounded-xl shadow-xl border border-gray-700">
+            <div className="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
+              <Globe className="text-blue-400" size={24} />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-white">Works Everywhere</h3>
+            <p className="text-gray-300">
+              Compatible with any public website. Transform static content into dynamic conversations.
+            </p>
+          </div>
+
+          <div className="bg-gray-800 p-6 rounded-xl shadow-xl border border-gray-700">
+            <div className="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
+              <MessageSquare className="text-blue-400" size={24} />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-white">Natural Interaction</h3>
+            <p className="text-gray-300">
+              Ask questions, get summaries, and interact with web content through natural conversation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-900 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="w-16 h-16 mx-auto bg-blue-900/50 rounded-full flex items-center justify-center mb-4">
+                <Link className="text-blue-400" size={32} />
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-white">Copy Website URL</h3>
+              <p className="text-gray-300">Find any website you want to chat with</p>
+            </div>
+            <div>
+              <div className="w-16 h-16 mx-auto bg-blue-900/50 rounded-full flex items-center justify-center mb-4">
+                <PlusCircle className="text-blue-400" size={32} />
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-white">Add Our Prefix</h3>
+              <p className="text-gray-300">Prepend chatweb.swayam.tech/ to the URL</p>
+            </div>
+            <div>
+              <div className="w-16 h-16 mx-auto bg-blue-900/50 rounded-full flex items-center justify-center mb-4">
+                <MessagesSquare className="text-blue-400" size={32} />
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-white">Start Chatting</h3>
+              <p className="text-gray-300">Ask questions and interact naturally</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer className="bg-gray-950 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+          <p>© 2024 WebChat. Made with ❤️ by Swayam</p>
+        </div>
       </footer>
     </div>
   );
-}
+};
+
+export default LandingPage;
+
+
