@@ -125,7 +125,7 @@ const LandingPage = () => {
 
       <footer className="bg-gray-950 py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-          <p>© 2024 WebChat</p>
+          <p>© 2024 ChatWeb</p>
         </div>
       </footer>
     </div>
