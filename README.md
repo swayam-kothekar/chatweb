@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗨️ ChatWeb – Chat with Any Website!  
 
-## Getting Started
+ChatWeb is an **AI-powered chatbot** that enables users to interact with any **website or article** by simply **https://chatweb.swayam.tech/**. The system extracts, vectorizes, and stores the website content in a **Pinecone vector database**, allowing seamless conversations.  
 
-First, run the development server:
+## 🚀 Features  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🔹 **Chat with Any Website**  
+Transform static websites into interactive conversations. Extracts **text content** from any article or webpage and makes it **queryable** through an AI chatbot.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🔹 **Retrieval-Augmented Generation (RAG)**  
+Enhances chatbot responses by retrieving relevant information from **pre-stored website vectors**, ensuring **context-aware and factually grounded answers**.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🔹 **Vector Database for Storage & Retrieval**  
+Utilizes **Pinecone** to efficiently store and retrieve high-dimensional text embeddings, optimizing response accuracy and speed.  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔹 **LLM-Powered Conversations**  
+Integrates with **Large Language Models (LLMs)** to generate responses based on website content.  
 
-## Learn More
+### 🔹 **Persistent Chat History**  
+Saves user interactions for previously visited websites, allowing users to **resume conversations** with past articles.  
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend:** React, Next.js  
+- **Backend:** Node.js, Express.js  
+- **Database:** Pinecone (Vector Storage)  
+- **Infrastructure:** AWS (Lambda, S3, API Gateway), Docker  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 How It Works  
 
-## Deploy on Vercel
+1. **User prepends the ChatWeb URL** to any article or website link.  
+2. **Backend extracts, vectorizes, and stores** the website content in Pinecone.  
+3. **Chatbot loads**, allowing users to ask questions about the page content.  
+4. **LLM processes queries** and provides contextually relevant responses.  
+5. **Chat history is saved**, enabling users to continue discussions from previous sessions.  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
