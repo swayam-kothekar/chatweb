@@ -1,6 +1,6 @@
 # 🗨️ ChatWeb – Chat with Any Website!  
 
-ChatWeb is an **AI-powered chatbot** that enables users to interact with any **website or article** by simply **https://chatweb.swayam.tech/**. The system extracts, vectorizes, and stores the website content in a **Pinecone vector database**, allowing seamless conversations.  
+ChatWeb is an **AI-powered chatbot** that enables users to interact with any **website or article** by simply **https://chatweb.swayamk.dev/**. The system extracts, vectorizes, and stores the website content in a **Pinecone vector database**, allowing seamless conversations.  
 
 ## 🚀 Features  
 
