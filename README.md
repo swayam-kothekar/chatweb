@@ -1,4 +1,4 @@
-# 🗨️ ChatWeb – Chat with Any Website (True In-Memory Vector RAG)
+# 🗨️ ChatWeb – Chat with Any Website
 
 ChatWeb is an AI-powered conversational chatbot that enables users to interact with any **website, article, or documentation page** in real-time using **Retrieval-Augmented Generation (RAG)**.
 
