@@ -1,37 +1,90 @@
-# 🗨️ ChatWeb – Chat with Any Website!  
+# 🗨️ ChatWeb – Chat with Any Website (True In-Memory Vector RAG)
 
-ChatWeb is an **AI-powered chatbot** that enables users to interact with any **website or article** by simply **https://website-chat-app-nine.vercel.app/**. The system extracts, vectorizes, and stores the website content in a **Pinecone vector database**, allowing seamless conversations.  
+ChatWeb is an AI-powered conversational chatbot that enables users to interact with any **website, article, or documentation page** in real-time using **Retrieval-Augmented Generation (RAG)**.
 
-## 🚀 Features  
+By simply entering a target URL, ChatWeb extracts the page content, chunks it into semantic paragraphs, generates high-dimensional vector embeddings, indexes them into an in-memory vector store, and streams factual answers using Google's **Gemini 3.5 Flash Lite**.
 
-### 🔹 **Chat with Any Website**  
-Transform static websites into interactive conversations. Extracts **text content** from any article or webpage and makes it **queryable** through an AI chatbot.  
+---
 
-### 🔹 **Retrieval-Augmented Generation (RAG)**  
-Enhances chatbot responses by retrieving relevant information from **pre-stored website vectors**, ensuring **context-aware and factually grounded answers**.  
+## 🚀 Key Highlights
 
-### 🔹 **Vector Database for Storage & Retrieval**  
-Utilizes **Pinecone** to efficiently store and retrieve high-dimensional text embeddings, optimizing response accuracy and speed.  
+- 🧠 **True Vector RAG Architecture**:
+  1. **Chunking**: Breaks extracted webpage text into overlapping semantic blocks.
+  2. **Vector Embeddings**: Generates 3,072-dimensional vector embeddings using Google's `gemini-embedding-001`.
+  3. **Cosine Similarity Search**: Performs real-time mathematical vector similarity ranking to retrieve the Top-K most relevant chunks for every question.
+  4. **Grounding & Generation**: Augments the model's prompt with retrieved vector snippets and streams answers.
+- ⚡ **Zero Database Setup**: Runs an in-memory vector store directly in server memory. **No Pinecone, Upstash, or external databases to configure or maintain.**
+- 🔒 **Never Gets Deleted or Paused**: Because there is no external database tier, your application will **never expire or pause due to inactivity**.
+- 🌐 **Always Live & Fresh**: Pulls current live website content dynamically on demand.
+- 💬 **Multi-Turn Chat**: Natural conversational interface with suggested prompt chips and rich Markdown rendering.
+- 🎨 **Modern Dark UI**: Ambient glassmorphism, responsive mobile-ready layout, code block syntax, and 1-click copy actions.
 
-### 🔹 **LLM-Powered Conversations**  
-Integrates with **Large Language Models (LLMs)** to generate responses based on website content.  
+---
 
-### 🔹 **Persistent Chat History**  
-Saves user interactions for previously visited websites, allowing users to **resume conversations** with past articles.  
+## 🛠️ Tech Stack
 
-## 🛠️ Tech Stack  
+- **Framework**: Next.js 14 (App Router)
+- **Frontend**: React 18, Tailwind CSS, NextUI, Lucide Icons, React Markdown
+- **Scraping Engine**: Cheerio (fast HTML parsing & structural text extraction)
+- **Embedding Model**: Google `gemini-embedding-001` (3,072 dimensions)
+- **Vector Search Engine**: In-memory Cosine Similarity Vector Index
+- **Generation LLM**: Google `gemini-3.5-flash-lite`
+- **Streaming**: Vercel AI SDK (`useChat`, `GoogleGenerativeAIStream`)
 
-- **Frontend:** React, Next.js  
-- **Backend:** Node.js, Express.js  
-- **Database:** Pinecone (Vector Storage)  
-- **Infrastructure:** AWS (Lambda, S3, API Gateway), Docker  
+---
 
-## 🔧 How It Works  
+## ⚙️ Getting Started
 
-1. **User prepends the ChatWeb URL** to any article or website link.  
-2. **Backend extracts, vectorizes, and stores** the website content in Pinecone.  
-3. **Chatbot loads**, allowing users to ask questions about the page content.  
-4. **LLM processes queries** and provides contextually relevant responses.  
-5. **Chat history is saved**, enabling users to continue discussions from previous sessions.  
+### 1. Install Dependencies
+```bash
+npm install
+```
 
+### 2. Configure Environment Variables
+Get your **free API key** at [aistudio.google.com](https://aistudio.google.com) (no credit card required) and add it to `.env`:
+```bash
+cp .env.example .env
+```
 
+Inside `.env`:
+```env
+# Free Google Gemini API Key
+GEMINI_API_KEY="AIzaSy..."
+```
+
+### 3. Run the Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🔧 How the True RAG Pipeline Works
+
+```
+  [User enters URL] 
+         │
+         ▼
+  [Cheerio HTML Scraper] ──► Strips headers, navigation, ads, & scripts
+         │
+         ▼
+  [Text Splitter] ─────────► Splits text into 700-character overlapping chunks
+         │
+         ▼
+  [Gemini Embedding-001] ──► Generates 3,072-dim vectors for each chunk
+         │
+         ▼
+  [In-Memory Vector Store] ─► Stores { chunk_id, text, vector } in server memory
+         │
+  [User asks question]
+         │
+         ▼
+  [Vector Search] ─────────► Computes cosine similarity, retrieves Top-5 relevant chunks
+         │
+         ▼
+  [Prompt Augmentation] ───► Stuffs Top-5 retrieved chunks into context
+         │
+         ▼
+  [Gemini 3.5 Flash Lite] ──► Streams grounded, factual answer back to the UI
+```
