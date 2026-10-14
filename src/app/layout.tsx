@@ -7,7 +7,7 @@ import { Providers } from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ChatWeb — Chat with Any Website",
+  title: "ChatWeb - Chat with Any Website",
   description:
     "Transform any webpage, article, or documentation into an interactive AI conversation powered by Retrieval-Augmented Generation (RAG).",
   keywords: ["RAG", "AI Chatbot", "Chat with Website", "Next.js", "Upstash"],
